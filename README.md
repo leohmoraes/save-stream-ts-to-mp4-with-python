@@ -18,8 +18,6 @@ pip3 install requests
 
 pip3 install python-ffmpeg-video-streaming
 
-pip3 install date
-
 
 ## CONFIG
 
