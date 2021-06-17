@@ -51,8 +51,8 @@ def convertMp4(urlVideo,seq):
 def start():
     i=0
     for link in links:
-        i+=1
         convertMp4(link,i)
+        i+=1
 
         
 response=doLogin()
