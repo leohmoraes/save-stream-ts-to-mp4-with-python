@@ -1,4 +1,5 @@
-# save-stream-tls-to-mp4-with-python
+# save-stream-ts-to-mp4-with-python
+# Using python to save videos from stream url (ts)
 
 ## INSTALL FFMPEG
 
