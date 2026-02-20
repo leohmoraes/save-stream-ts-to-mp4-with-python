@@ -1,45 +1,41 @@
 import requests
 import m3u8
-import reg
+import re
 
-##pip3 install request
-##pip3 install m3u8
-##pip3 install regex
-## Run
-## python3 m3u8info.py
+# pip3 install requests
+# pip3 install m3u8
+# pip3 install regex
+# Run:
+# python3 m3u8info.py
 
 """
-This script is used to change relative path in index.m3u8 to absolute url of the file
-Write a file to each link of index, with the new url
+This script changes relative paths in index.m3u8 to absolute URLs.
+It writes one file per link with the updated URLs.
 """
 
-links = {
+links = [
     'https://videos......m3u8',
-    'https://videos....index.m3u8'
-}
+    'https://videos....index.m3u8',
+]
 
 
-def getInfo(urlVideo,seq):
-    seq="{:0>2d}".format(seq)
-    playlist = m3u8.load(urlVideo)
+def get_info(url_video, seq):
+    seq_str = "{:0>2d}".format(seq)
+    playlist = m3u8.load(url_video)
 
-    # /index.m3u8 
-    playlist.base_path = re.sub(r"/index(.*).m3u8","", urlVideo) 
+    # Strip /index.m3u8 to get the base path
+    playlist.base_path = re.sub(r"/index(.*).m3u8", "", url_video)
 
-    # print(playlist.dumps())
-    # for iframe_playlist in playlist.iframe_playlists:
-        # print("uri", iframe_playlist.uri)
-    
-    # if you want to write a file from its content
-    playlist.dump("m3u8/playlist-"+seq+".m3u8")
-    print( "seq", seq, "playlist.base_uri",playlist.base_path, "url",urlVideo,)
+    playlist.dump("m3u8/playlist-" + seq_str + ".m3u8")
+    print("seq", seq_str, "playlist.base_path", playlist.base_path, "url", url_video)
 
 
 def start():
-    i=0
-    for link in links:
-        i+=1
-        getInfo(link,i)
+    for i, link in enumerate(links, start=1):
+        get_info(link, i)
 
-print(f"Qty of vídeos: {len(links)}")
-start()
+
+if __name__ == "__main__":
+    print(f"Qty of videos: {len(links)}")
+    start()
+
